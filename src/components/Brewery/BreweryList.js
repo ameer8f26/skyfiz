@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from '@/lib/axios'
+import { withRouter } from 'next/router'
 
-export default class BreweryList extends Component {
+ class BreweryList extends Component {
 
     constructor(props) {
         super(props)
@@ -12,7 +13,10 @@ export default class BreweryList extends Component {
     }
 
     handleShowBrewery(ev) {
-        ev.preventDefault();
+        this.props.router.push({
+            pathname: '/brewery/[bid]',
+            query: { bid: ev.target.dataset.id }
+        })
     }
 
     componentDidMount() {
@@ -70,3 +74,5 @@ export default class BreweryList extends Component {
         )
     }
 }
+
+export default withRouter(BreweryList)
